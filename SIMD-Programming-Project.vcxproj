@@ -130,8 +130,8 @@
     <CustomBuild Include="AVX1.asm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\NASM\nasm-2.16.03\nasm -f win64 AVX2.asm</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AVX2.obj</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\NASM\nasm-2.16.03\nasm -f win64 AVX1.asm</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AVX1.obj</Outputs>
     </CustomBuild>
     <CustomBuild Include="AVX2.asm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

@@ -32,7 +32,7 @@ int main() {
 	double result = 0.0;
 
 	// array size and bytes required
-	const size_t ARRAY_SIZE = 1 << 2;
+	const size_t ARRAY_SIZE = 5;
 	const size_t ARRAY_BYTES = ARRAY_SIZE * sizeof(double);
 
 	// array declaration
@@ -56,11 +56,15 @@ int main() {
 
 	//--------------------------- x86 Program ---------------------------//
 
-	printf("Running x86 Program...\n\n");
+	printf("\n\nRunning x86 Program...\n\n");
 	result = x86(ARRAY_SIZE, vec1, vec2);
-	printf("Result : %lf", result);
+	printf("Result : %lf\n\n", result);
 
 	//--------------------------- AVX1 Program ---------------------------//
+
+	printf("\n\nRunning AVX1 Program...\n\n");
+	result = AVX1(ARRAY_SIZE, vec1, vec2);
+	printf("Result : %lf\n\n", result);
 
 	//--------------------------- AVX2 Program ---------------------------//
 
