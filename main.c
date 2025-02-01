@@ -32,7 +32,7 @@ int main() {
 	double result = 0.0;
 
 	// array size and bytes required
-	const size_t ARRAY_SIZE = 5;
+	const size_t ARRAY_SIZE = 7;
 	const size_t ARRAY_BYTES = ARRAY_SIZE * sizeof(double);
 
 	// array declaration
@@ -68,6 +68,9 @@ int main() {
 
 	//--------------------------- AVX2 Program ---------------------------//
 
+	printf("\n\nRunning AVX2 Program...\n\n");
+	result = AVX2(ARRAY_SIZE, vec1, vec2);
+	printf("Result : %lf\n\n", result);
 
 	// free arrays
 	free(vec1);

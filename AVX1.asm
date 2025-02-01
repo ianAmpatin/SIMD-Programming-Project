@@ -2,8 +2,6 @@ section .data
 EXCESS_COUNT DQ 0
 ADDRESS DQ 0
 
-VAL DQ 10.0, 20.0
-
 section .text
 bits 64
 default rel
@@ -28,6 +26,10 @@ AVX1:
     ; Load Address of Vector 1
     MOV R10, [ADDRESS]
 
+    ; Check if RAX = 0
+    CMP RAX, 0
+    JE SKIP
+
     ; Perform Operation using XMM Registers
     MOV RCX, RAX
     L1:
@@ -41,18 +43,20 @@ AVX1:
         ADD R8, 16
 
     LOOP L1
+    SKIP:
 
     ; Handle case where EXCESS_COUNT > 0
     CMP QWORD[EXCESS_COUNT], 0
     JE FINISH
 
-    MOVSD XMM1, [R10]
-    MOVSD XMM2, [R8]
-    MULSD XMM1, XMM2
-    ADDSD XMM0, XMM1
+        MOVSD XMM1, [R10]
+        MOVSD XMM2, [R8]
+        MULSD XMM1, XMM2
+        ADDSD XMM0, XMM1
 
     FINISH:
 
+    ; Add the lower and uppper part of the XMM register to get the total value
     HADDPD XMM0, XMM0
 
     RET
