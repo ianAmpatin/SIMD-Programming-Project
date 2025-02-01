@@ -1,7 +1,8 @@
 ﻿  main.c
+C:\Users\Sleepy\OneDrive\Documents\Academic\CEPARCO\VS2022\SIMD-Programming-Project\SIMD-Programming-Project\main.c(83,16): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
   Generating code
   1 of 6 functions (16.7%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  SIMD-Programming-Project.vcxproj -> C:\Users\U S E R - P C\Source\Repos\SIMD-Programming-Project\x64\Release\SIMD-Programming-Project.exe
+  SIMD-Programming-Project.vcxproj -> C:\Users\Sleepy\OneDrive\Documents\Academic\CEPARCO\VS2022\SIMD-Programming-Project\x64\Release\SIMD-Programming-Project.exe

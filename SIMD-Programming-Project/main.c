@@ -35,6 +35,7 @@ double C_Kernel(size_t n, double* vector1, double* vector2)
 int main() {
 	// variables
 	double result = 0.0;
+	int CKernelTime = 0;
 
 	// array size and bytes required
 	const size_t pow = 20;
@@ -69,7 +70,7 @@ int main() {
 	// initialize cache
 	if (cacheInit) {
 		for (size_t i = 0; i < cacheInit; ++i) {
-			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+			C_Kernel(ARRAY_SIZE, vec1, vec2);
 		}
 	}
 
@@ -79,6 +80,7 @@ int main() {
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
+	CKernelTime = totalTime;
 
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
@@ -89,7 +91,7 @@ int main() {
 	// initialize cache
 	if (cacheInit) {
 		for (size_t i = 0; i < cacheInit; ++i) {
-			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+			x86(ARRAY_SIZE, vec1, vec2);
 		}
 	}
 
@@ -102,6 +104,7 @@ int main() {
 
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
+	printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
 
 	//--------------------------- AVX1 Kernel ---------------------------//
 
@@ -109,7 +112,7 @@ int main() {
 	// initialize cache
 	if (cacheInit) {
 		for (size_t i = 0; i < cacheInit; ++i) {
-			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+			AVX1(ARRAY_SIZE, vec1, vec2);
 		}
 	}
 
@@ -122,6 +125,7 @@ int main() {
 
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
+	printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
 
 	//--------------------------- AVX2 Kernel ---------------------------//
 
@@ -129,7 +133,7 @@ int main() {
 	// initialize cache
 	if (cacheInit) {
 		for (size_t i = 0; i < cacheInit; ++i) {
-			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+			AVX2(ARRAY_SIZE, vec1, vec2);
 		}
 	}
 
@@ -142,6 +146,7 @@ int main() {
 
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
+	printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
 
 	// free arrays
 	free(vec1);
