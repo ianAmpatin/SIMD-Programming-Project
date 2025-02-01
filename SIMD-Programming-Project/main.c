@@ -57,8 +57,8 @@ int main() {
 	// initialize array values
 	for (int i = 0; i < ARRAY_SIZE; i++)
 	{
-		vec1[i] = 1.0;
-		vec2[i] = 1.0;
+		vec1[i] = 5.0;
+		vec2[i] = 5.0;
 	}
 
 	//--------------------------- C Program ---------------------------//
@@ -69,7 +69,7 @@ int main() {
 		result = C_Kernel(ARRAY_SIZE, vec1, vec2);
 	}
 	endTime = GetStopWatch();
-	totalTime = (endTime - startTime) / 30;
+	totalTime = (endTime - startTime) / numExec;
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
@@ -81,7 +81,7 @@ int main() {
 		result = x86(ARRAY_SIZE, vec1, vec2);
 	}
 	endTime = GetStopWatch();
-	totalTime = (endTime - startTime) / 30;
+	totalTime = (endTime - startTime) / numExec;
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
@@ -93,7 +93,7 @@ int main() {
 		result = AVX1(ARRAY_SIZE, vec1, vec2);
 	}
 	endTime = GetStopWatch();
-	totalTime = (endTime - startTime) / 30;
+	totalTime = (endTime - startTime) / numExec;
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
@@ -105,7 +105,7 @@ int main() {
 		result = AVX2(ARRAY_SIZE, vec1, vec2);
 	}
 	endTime = GetStopWatch();
-	totalTime = (endTime - startTime) / 30;
+	totalTime = (endTime - startTime) / numExec;
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
