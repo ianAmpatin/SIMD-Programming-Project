@@ -1,2 +1,3 @@
 ﻿  main.c
-  SIMD-Programming-Project.vcxproj -> C:\Users\Sleepy\OneDrive\Documents\Academic\CEPARCO\VS2022\SIMD-Programming-Project\x64\Debug\SIMD-Programming-Project.exe
+C:\Users\U S E R - P C\source\repos\SIMD-Programming-Project\SIMD-Programming-Project\main.c(37,30): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+  SIMD-Programming-Project.vcxproj -> C:\Users\U S E R - P C\source\repos\SIMD-Programming-Project\x64\Debug\SIMD-Programming-Project.exe

@@ -31,8 +31,10 @@ int main() {
 	// variables
 	double result = 0.0;
 
+	size_t power = 20; // 2^power
+
 	// array size and bytes required
-	const size_t ARRAY_SIZE = 7;
+	const size_t ARRAY_SIZE = 1 << power;
 	const size_t ARRAY_BYTES = ARRAY_SIZE * sizeof(double);
 
 	// array declaration
@@ -42,17 +44,23 @@ int main() {
 	// initialize array values
 	for (int i = 0; i < ARRAY_SIZE; i++)
 	{
-		vec1[i] = 2.0;
-		vec2[i] = 2.0;
+		vec1[i] = 1.0;
+		vec2[i] = 1.0;
 	}
 
 	// print array values
-	for (int i = 0; i < ARRAY_SIZE; i++)
-	{
-		printf("Array 1 : %lf  ||  Array 2 : %lf\n", vec1[i], vec2[i]);
-	}
+	//for (int i = 0; i < ARRAY_SIZE; i++)
+	//{
+	//	 printf("Array 1 : %lf  ||  Array 2 : %lf\n", vec1[i], vec2[i]);
+	//}
 
 	//--------------------------- C Program ---------------------------//
+
+	printf("Running C Program...\n\n");
+	for (int i = 0; i < ARRAY_SIZE; ++i) {
+		result += vec1[i] * vec2[i];
+	}
+	printf("Result : %lf\n\n", result);
 
 	//--------------------------- x86 Program ---------------------------//
 
