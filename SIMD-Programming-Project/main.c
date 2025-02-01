@@ -37,7 +37,7 @@ int main() {
 	double result = 0.0;
 
 	// array size and bytes required
-	const size_t pow = 26;
+	const size_t pow = 20;
 	const size_t ARRAY_SIZE = 1ULL << pow; // 1ULL for explicit 64-bit shift to suppress 32-bit implicitly converted to 64-bit compiler warning
 	const size_t ARRAY_BYTES = ARRAY_SIZE * sizeof(double);
 
@@ -51,8 +51,8 @@ int main() {
 	uint64_t totalTime;
 
 	// number of execution per kernel
-	const size_t numExec = 30;
-	const size_t cacheInit = 0;
+	size_t numExec = 30;
+	size_t cacheInit = 5;
 
 
 	// initialize array values
@@ -79,6 +79,7 @@ int main() {
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
+
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
@@ -98,6 +99,7 @@ int main() {
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
+
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
@@ -117,6 +119,7 @@ int main() {
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
+
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
@@ -136,6 +139,7 @@ int main() {
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
+
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
