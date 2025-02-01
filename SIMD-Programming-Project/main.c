@@ -21,20 +21,23 @@ extern double x86(size_t n, double* vector1,double* vector2);
 extern double AVX1(size_t n, double* vector1, double* vector2);
 extern double AVX2(size_t n, double* vector1, double* vector2);
 
-
-double C_Implementation(size_t n, double* vector1, double* vector2)
+double C_Kernel(size_t n, double* vector1, double* vector2)
 {
-	return 0.0;
+	double result = 0.0;
+	for (int i = 0; i < n; ++i)
+	{
+		result += vector1[i] * vector2[i];
+	}
+
+	return result;
 }
 
 int main() {
 	// variables
 	double result = 0.0;
 
-	size_t power = 20; // 2^power
-
 	// array size and bytes required
-	const size_t ARRAY_SIZE = 1 << power;
+	const size_t ARRAY_SIZE = 1 << 3;
 	const size_t ARRAY_BYTES = ARRAY_SIZE * sizeof(double);
 
 	// array declaration
@@ -48,18 +51,10 @@ int main() {
 		vec2[i] = 1.0;
 	}
 
-	// print array values
-	//for (int i = 0; i < ARRAY_SIZE; i++)
-	//{
-	//	 printf("Array 1 : %lf  ||  Array 2 : %lf\n", vec1[i], vec2[i]);
-	//}
-
 	//--------------------------- C Program ---------------------------//
 
 	printf("Running C Program...\n\n");
-	for (int i = 0; i < ARRAY_SIZE; ++i) {
-		result += vec1[i] * vec2[i];
-	}
+	result = C_Kernel(ARRAY_SIZE, vec1, vec2);
 	printf("Result : %lf\n\n", result);
 
 	//--------------------------- x86 Program ---------------------------//
