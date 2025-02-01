@@ -37,7 +37,7 @@ int main() {
 	double result = 0.0;
 
 	// array size and bytes required
-	const size_t pow = 20;
+	const size_t pow = 26;
 	const size_t ARRAY_SIZE = 1ULL << pow; // 1ULL for explicit 64-bit shift to suppress 32-bit implicitly converted to 64-bit compiler warning
 	const size_t ARRAY_BYTES = ARRAY_SIZE * sizeof(double);
 
@@ -51,7 +51,8 @@ int main() {
 	uint64_t totalTime;
 
 	// number of execution per kernel
-	const numExec = 30;
+	const size_t numExec = 30;
+	const size_t cacheInit = 0;
 
 
 	// initialize array values
@@ -64,6 +65,14 @@ int main() {
 	//--------------------------- C Program ---------------------------//
 
 	printf("Running C Program...\n\n");
+
+	// initialize cache
+	if (cacheInit) {
+		for (size_t i = 0; i < cacheInit; ++i) {
+			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+		}
+	}
+
 	startTime = GetStopWatch();
 	for (size_t i = 0; i < numExec; ++i) {
 		result = C_Kernel(ARRAY_SIZE, vec1, vec2);
@@ -76,6 +85,13 @@ int main() {
 	//--------------------------- x86 Program ---------------------------//
 
 	printf("\n\nRunning x86 Program...\n\n");
+	// initialize cache
+	if (cacheInit) {
+		for (size_t i = 0; i < cacheInit; ++i) {
+			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+		}
+	}
+
 	startTime = GetStopWatch();
 	for (size_t i = 0; i < numExec; ++i) {
 		result = x86(ARRAY_SIZE, vec1, vec2);
@@ -88,6 +104,13 @@ int main() {
 	//--------------------------- AVX1 Program ---------------------------//
 
 	printf("\n\nRunning AVX1 Program...\n\n");
+	// initialize cache
+	if (cacheInit) {
+		for (size_t i = 0; i < cacheInit; ++i) {
+			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+		}
+	}
+
 	startTime = GetStopWatch();
 	for (size_t i = 0; i < numExec; ++i) {
 		result = AVX1(ARRAY_SIZE, vec1, vec2);
@@ -100,6 +123,13 @@ int main() {
 	//--------------------------- AVX2 Program ---------------------------//
 
 	printf("\n\nRunning AVX2 Program...\n\n");
+	// initialize cache
+	if (cacheInit) {
+		for (size_t i = 0; i < cacheInit; ++i) {
+			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+		}
+	}
+
 	startTime = GetStopWatch();
 	for (size_t i = 0; i < numExec; ++i) {
 		result = AVX2(ARRAY_SIZE, vec1, vec2);
