@@ -51,25 +51,25 @@ int main() {
 		vec2[i] = 1.0;
 	}
 
-	//--------------------------- C Program ---------------------------//
+	//--------------------------- C Kernel ---------------------------//
 
 	printf("Running C Program...\n\n");
 	result = C_Kernel(ARRAY_SIZE, vec1, vec2);
 	printf("Result : %lf\n\n", result);
 
-	//--------------------------- x86 Program ---------------------------//
+	//--------------------------- x86 Kernel ---------------------------//
 
 	printf("\n\nRunning x86 Program...\n\n");
 	result = x86(ARRAY_SIZE, vec1, vec2);
 	printf("Result : %lf\n\n", result);
 
-	//--------------------------- AVX1 Program ---------------------------//
+	//--------------------------- AVX1 Kernel ---------------------------//
 
 	printf("\n\nRunning AVX1 Program...\n\n");
 	result = AVX1(ARRAY_SIZE, vec1, vec2);
 	printf("Result : %lf\n\n", result);
 
-	//--------------------------- AVX2 Program ---------------------------//
+	//--------------------------- AVX2 Kernel ---------------------------//
 
 	printf("\n\nRunning AVX2 Program...\n\n");
 	result = AVX2(ARRAY_SIZE, vec1, vec2);
