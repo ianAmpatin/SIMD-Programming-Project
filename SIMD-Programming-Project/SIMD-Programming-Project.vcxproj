@@ -132,18 +132,24 @@
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\nasm\nasm -f win64 AVX1.asm</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AVX1.obj</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\nasm\nasm -f win64 AVX1.asm</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AVX1.obj</Outputs>
     </CustomBuild>
     <CustomBuild Include="AVX2.asm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\nasm\nasm -f win64 AVX2.asm</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AVX2.obj</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\nasm\nasm -f win64 AVX2.asm</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AVX2.obj</Outputs>
     </CustomBuild>
     <CustomBuild Include="x86.asm">
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\nasm\nasm -f win64 x86.asm</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">x86.obj</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\nasm\nasm -f win64 x86.asm</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">x86.obj</Outputs>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

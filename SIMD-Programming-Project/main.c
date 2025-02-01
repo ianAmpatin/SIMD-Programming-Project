@@ -51,7 +51,8 @@ int main() {
 	uint64_t totalTime;
 
 	// number of execution per kernel
-	const numExec = 30;
+	size_t numExec = 30;
+	size_t cacheInit = 5;
 
 
 	// initialize array values
@@ -64,48 +65,81 @@ int main() {
 	//--------------------------- C Kernel ---------------------------//
 
 	printf("Running C Program...\n\n");
+
+	// initialize cache
+	if (cacheInit) {
+		for (size_t i = 0; i < cacheInit; ++i) {
+			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+		}
+	}
+
 	startTime = GetStopWatch();
 	for (size_t i = 0; i < numExec; ++i) {
 		result = C_Kernel(ARRAY_SIZE, vec1, vec2);
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
+
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
 	//--------------------------- x86 Kernel ---------------------------//
 
 	printf("\n\nRunning x86 Program...\n\n");
+	// initialize cache
+	if (cacheInit) {
+		for (size_t i = 0; i < cacheInit; ++i) {
+			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+		}
+	}
+
 	startTime = GetStopWatch();
 	for (size_t i = 0; i < numExec; ++i) {
 		result = x86(ARRAY_SIZE, vec1, vec2);
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
+
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
 	//--------------------------- AVX1 Kernel ---------------------------//
 
 	printf("\n\nRunning AVX1 Program...\n\n");
+	// initialize cache
+	if (cacheInit) {
+		for (size_t i = 0; i < cacheInit; ++i) {
+			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+		}
+	}
+
 	startTime = GetStopWatch();
 	for (size_t i = 0; i < numExec; ++i) {
 		result = AVX1(ARRAY_SIZE, vec1, vec2);
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
+
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
 	//--------------------------- AVX2 Kernel ---------------------------//
 
 	printf("\n\nRunning AVX2 Program...\n\n");
+	// initialize cache
+	if (cacheInit) {
+		for (size_t i = 0; i < cacheInit; ++i) {
+			result = C_Kernel(ARRAY_SIZE, vec1, vec2);
+		}
+	}
+
 	startTime = GetStopWatch();
 	for (size_t i = 0; i < numExec; ++i) {
 		result = AVX2(ARRAY_SIZE, vec1, vec2);
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
+
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldns\n", totalTime);
 
