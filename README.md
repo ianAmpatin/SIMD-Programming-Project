@@ -19,63 +19,63 @@ The kernel computes the dot product of two vectors, A and B, both represented as
 
 
 
-
 ## Program Output
+
 ### A. Program Output with Execution Times
 
 #### 1. Release <br />
-##### I. 2^20
+
+##### I. 2<sup>20</sup>
 
 ![image](https://github.com/user-attachments/assets/30ca8fb3-e4e4-4e43-a232-1ac3892525c5)
 
-##### II. 2^26
+##### II. 2<sup>26</sup>
 
 ![image](https://github.com/user-attachments/assets/1f404b04-cf70-4118-9387-d5eb05b4f4c8)
 
-##### III. 2^28
+##### III. 2<sup>28</sup>
 
 ![image](https://github.com/user-attachments/assets/8fe60eb6-f396-4b85-acfe-1236808087b0)
 
 
-##### IV. 2^29
+##### IV. 2<sup>29</sup>
 
 ![image](https://github.com/user-attachments/assets/37dce62f-2094-436d-9ec1-b552e5d38afd)
 
 
-##### V. 2^30
+##### V. 2<sup>30</sup>
 
 ![image](https://github.com/user-attachments/assets/3ecc4d8a-c0b9-419e-ab3d-d8bdf67c1ccb)
 
 
 
 #### 2. Debug <br />
-##### I. 2^20
+
+##### I. 2<sup>20</sup>
 
 ![image](https://github.com/user-attachments/assets/f08fa98b-35b8-4a46-a009-bce0b7162641)
 
-##### II. 2^26
-
+##### II. 2<sup>26</sup>
 
 ![image](https://github.com/user-attachments/assets/bb4f4b7e-930c-45fb-a739-008c1df6b73f)
 
 
-##### III. 2^28
+##### III. 2<sup>28</sup>
 
 ![image](https://github.com/user-attachments/assets/d1260fc4-0576-414c-9a12-7fba40e4b5ac)
 
-
-
-##### IV. 2^29
+##### IV. 2<sup>29</sup>
 
 ![image](https://github.com/user-attachments/assets/efd5f5b3-05e3-4c11-8326-fa5f7ce7fce2)
 
 
-##### V. 2^30
+##### V. 2<sup>30</sup>
 
 ![image](https://github.com/user-attachments/assets/ea621325-9902-4741-8d4c-a8eda5c93fd6)
 
 
 ## Execution Time Table
+
 ### 1. Average Execution Time
 The following tables contains the average execution time (in microseconds) for different implementations  measured in both Debug and Release modes across various vector sizes.
 
@@ -91,12 +91,15 @@ Based on the table
 ![image](https://github.com/user-attachments/assets/ee2d3e06-f407-4580-bf34-74400c3b0238)
 
 ## Performance Analysis
+
 ### 1. Analysis 
 <p align="justify"> 
   First is the evaluation of the execution speed and efficiency of different dot product kernel implementations: the C implementation, x86 SIMD, AVX2 using XMM registers, and AVX2 using YMM registers. As seen on the table provided on the Average Execution Time section the debug mode of C is the slowest among all of them while AVX2 YMM is the fastest. while x86 is has an improvement of speed from C, it is still slower from both AVX implementations because x86 still processes one element at a time like C but is faster because of its optimitation in floating-point execution. having said that both AVX are faster than the scalar implementations because of having the ability to process 2 elements at a time for AVX2 XMM and 4 elements at a time for AVX2 YMM, with that being reflected on the table as having C the slowest and AVX2 YMM fastest. Furthermore their vectorization affects a lot of things for example, having AVX2 YMM to process four elements per iteration, this leads to a fewer loop iterations, which means lesser memory access and an improved cache utilization which makes the CPU have a better performance. Moreover, while running the program to gather the execution times we were able to observe that running the cache initialization multiple times did not significantly impact the results, indicating that the cache warm-up may be consistent after the first execution. Also, To minimize cache penalties, the C kernel was executed before each benchmark to warm up the cache. 
-
-    
 </p>
+
+In the specs it was stated only the required vector size output for testing are: 2<sup>20</sup>, 2<sup>26</sup>, 2<sup>30</sup>, and if 2<sup>30</sup> cannot be executed consider using 2<sup>29</sup> or 2<sup>28</sup> vector sizes. The inclusion of all these vector sizes gives a better understanding as to what affects the release 2<sub>30</sub> high total execution time compared to its debug counterpart, it has something to do with the system's memory capacity being the bottleneck. Running this in a system with a 16GB RAM, task manager shows approximately 12GB use of memory as shown below.
+
+![Release_TaskManager_2^30](https://github.com/user-attachments/assets/1da376a0-c379-4cdc-8bf3-6a5a37363333)
 
 ### 2. Problems Encountered
 
