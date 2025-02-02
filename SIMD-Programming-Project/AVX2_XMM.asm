@@ -5,9 +5,9 @@ ADDRESS DQ 0
 section .text
 bits 64
 default rel
-global AVX1
+global AVX2_XMM
 
-AVX1:
+AVX2_XMM:
     ; Store the address of the 1st vector
     MOV [ADDRESS], RDX
 

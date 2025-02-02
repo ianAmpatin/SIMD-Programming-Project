@@ -18,8 +18,8 @@ uint64_t GetStopWatch()
 }
 
 extern double x86(size_t n, double* vector1,double* vector2);
-extern double AVX1(size_t n, double* vector1, double* vector2);
-extern double AVX2(size_t n, double* vector1, double* vector2);
+extern double AVX2_XMM(size_t n, double* vector1, double* vector2);
+extern double AVX2_YMM(size_t n, double* vector1, double* vector2);
 
 double C_Kernel(size_t n, double* vector1, double* vector2)
 {
@@ -115,19 +115,19 @@ int main() {
 	printf("Execution time: %lldus\n", totalTime);
 	//printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
 
-	//--------------------------- AVX1 Kernel ---------------------------//
+	//--------------------------- AVX2_XMM Kernel ---------------------------//
 
-	printf("\n\nRunning AVX1 Program...\n\n");
+	printf("\n\nRunning AVX2_XMM Program...\n\n");
 	// initialize cache
 	if (cacheInit) {
 		for (size_t i = 0; i < cacheInit; ++i) {
-			AVX1(ARRAY_SIZE, vec1, vec2);
+			AVX2_XMM(ARRAY_SIZE, vec1, vec2);
 		}
 	}
 
 	startTime = GetStopWatch();
 	for (size_t i = 0; i < numExec; ++i) {
-		result = AVX1(ARRAY_SIZE, vec1, vec2);
+		result = AVX2_XMM(ARRAY_SIZE, vec1, vec2);
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
@@ -140,19 +140,19 @@ int main() {
 	printf("Execution time: %lldus\n", totalTime);
 	//printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
 
-	//--------------------------- AVX2 Kernel ---------------------------//
+	//--------------------------- AVX2_YMM Kernel ---------------------------//
 
-	printf("\n\nRunning AVX2 Program...\n\n");
+	printf("\n\nRunning AVX2_YMM Program...\n\n");
 	// initialize cache
 	if (cacheInit) {
 		for (size_t i = 0; i < cacheInit; ++i) {
-			AVX2(ARRAY_SIZE, vec1, vec2);
+			AVX2_YMM(ARRAY_SIZE, vec1, vec2);
 		}
 	}
 
 	startTime = GetStopWatch();
 	for (size_t i = 0; i < numExec; ++i) {
-		result = AVX2(ARRAY_SIZE, vec1, vec2);
+		result = AVX2_YMM(ARRAY_SIZE, vec1, vec2);
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
