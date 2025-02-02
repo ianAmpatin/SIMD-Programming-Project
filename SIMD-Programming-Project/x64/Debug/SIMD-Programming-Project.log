@@ -1,3 +1,1 @@
-﻿  main.c
-C:\Users\Sleepy\OneDrive\Documents\Academic\CEPARCO\VS2022\SIMD-Programming-Project\SIMD-Programming-Project\main.c(83,16): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
-  SIMD-Programming-Project.vcxproj -> C:\Users\Sleepy\OneDrive\Documents\Academic\CEPARCO\VS2022\SIMD-Programming-Project\x64\Debug\SIMD-Programming-Project.exe
+﻿  SIMD-Programming-Project.vcxproj -> C:\Users\Sleepy\OneDrive\Documents\Academic\CEPARCO\VS2022\SIMD-Programming-Project\x64\Debug\SIMD-Programming-Project.exe
