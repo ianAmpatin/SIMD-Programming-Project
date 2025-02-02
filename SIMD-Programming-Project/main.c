@@ -14,7 +14,7 @@ uint64_t GetStopWatch()
 
 	QueryPerformanceCounter(&t);
 	QueryPerformanceFrequency(&freq);
-	return(uint64_t)(t.QuadPart / (double) freq.QuadPart * NANOSECOND);
+	return(uint64_t)(t.QuadPart / (double) freq.QuadPart * MICROSECOND);
 }
 
 extern double x86(size_t n, double* vector1,double* vector2);
@@ -35,10 +35,11 @@ double C_Kernel(size_t n, double* vector1, double* vector2)
 int main() {
 	// variables
 	double result = 0.0;
+	double CRes = 0.0; // C result, will be the reference for error checking
 	int CKernelTime = 0;
 
 	// array size and bytes required
-	const size_t pow = 21;
+	const size_t pow = 20;
 	const size_t ARRAY_SIZE = 1ULL << pow; // 1ULL for explicit 64-bit shift to suppress 32-bit implicitly converted to 64-bit compiler warning
 	const size_t ARRAY_BYTES = ARRAY_SIZE * sizeof(double);
 
@@ -52,15 +53,18 @@ int main() {
 	uint64_t totalTime;
 
 	// number of execution per kernel
-	size_t numExec = 30;
-	size_t cacheInit = 5;
+	size_t numExec = 50;
+	size_t cacheInit = 3;
+
+	// err count
+	size_t errCount = 0;
 
 
 	// initialize array values
 	for (int i = 0; i < ARRAY_SIZE; i++)
 	{
-		vec1[i] = 5.0;
-		vec2[i] = 5.0;
+		vec1[i] = 1.0;
+		vec2[i] = 1.0;
 	}
 
 	//--------------------------- C Kernel ---------------------------//
@@ -82,8 +86,10 @@ int main() {
 	totalTime = (endTime - startTime) / numExec;
 	CKernelTime = totalTime;
 
+	CRes = result;
+
 	printf("Result : %lf\n\n", result);
-	printf("Execution time: %lldns\n", totalTime);
+	printf("Execution time: %lldus\n", totalTime);
 
 	//--------------------------- x86 Kernel ---------------------------//
 
@@ -101,10 +107,13 @@ int main() {
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
+	if (result != CRes) {
+		errCount++;
+	}
 
 	printf("Result : %lf\n\n", result);
-	printf("Execution time: %lldns\n", totalTime);
-	printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
+	printf("Execution time: %lldus\n", totalTime);
+	//printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
 
 	//--------------------------- AVX1 Kernel ---------------------------//
 
@@ -123,9 +132,13 @@ int main() {
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
 
+	if (result != CRes) {
+		errCount++;
+	}
+
 	printf("Result : %lf\n\n", result);
-	printf("Execution time: %lldns\n", totalTime);
-	printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
+	printf("Execution time: %lldus\n", totalTime);
+	//printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
 
 	//--------------------------- AVX2 Kernel ---------------------------//
 
@@ -144,9 +157,15 @@ int main() {
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
 
+	if (result != CRes) {
+		errCount++;
+	}
+
 	printf("Result : %lf\n\n", result);
-	printf("Execution time: %lldns\n", totalTime);
-	printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
+	printf("Execution time: %lldus\n", totalTime);
+	//printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
+
+	printf("Total Error Count: %lld\n\n", errCount);
 
 	// free arrays
 	free(vec1);
