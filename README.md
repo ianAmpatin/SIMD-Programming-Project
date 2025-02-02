@@ -87,8 +87,11 @@ Based on the table
 - AVX2 using XMM registers performed a notable decrease in execution time compared to the first two implementations.
 - AVX2 using YMM registers has the best results out of all the registers<br />
 *Will be further explained at the performance analysis part*
+
 ## Correctness Check
 ![image](https://github.com/user-attachments/assets/ee2d3e06-f407-4580-bf34-74400c3b0238)
+
+The basis for the correctness check is it uses the value gathered by implementing sdot function in C and using this value as reference to check the different kernels for error. To check C's correctness, by setting all the values for vectors a and b to 1 the answer must be the array size or vector size used which can be observed in the figures above in particular under the Program Output. It outputs their respective array sizes, for the correctness check the values used for each elements in vector1 is 2.0 and vector2 is 1.0 with vector size of 2<sup>20</sup> resulting in 2*2<sup>20</sup> or 2097152
 
 ## Performance Analysis
 
