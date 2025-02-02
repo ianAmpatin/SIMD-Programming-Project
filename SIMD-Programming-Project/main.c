@@ -171,7 +171,6 @@ int main() {
 	}
 
 	printf("Total Error Count: %lld\n\n", errCount);
-	printf("Update 10:53 PM - 2/2/2025");
 
 	// free arrays
 	free(vec1);
