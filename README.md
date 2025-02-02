@@ -93,6 +93,17 @@ Based on the table
 ## Performance Analysis
 ### 1. Analysis 
 <p align="justify"> 
-First is the evaluation of the execution speed and efficiency of different dot product kernel implementations: the C implementation, x86 SIMD, AVX2 using XMM registers, and AVX2 using YMM registers. As seen on the table provided on the *Average Execution Time section* the debug mode of C is the slowest among all of them while AVX2 YMM is the fastest. while x86 is has an improvement of speed from C, it is still slower from both AVX implementations because x86 still processes one element at a time like C but is faster because of its optimitation in floating-point execution. having said that both AVX are faster than the scalar implementations because of having the ability to process 2 elements at a time for AVX2 XMM and 4 elements at a time for AVX2 YMM, with that being reflected on the table as having C the slowest and AVX2 YMM fastest. 
+First is the evaluation of the execution speed and efficiency of different dot product kernel implementations: the C implementation, x86 SIMD, AVX2 using XMM registers, and AVX2 using YMM registers. As seen on the table provided on the *Average Execution Time section* the debug mode of C is the slowest among all of them while AVX2 YMM is the fastest. while x86 is has an improvement of speed from C, it is still slower from both AVX implementations because x86 still processes one element at a time like C but is faster because of its optimitation in floating-point execution. having said that both AVX are faster than the scalar implementations because of having the ability to process 2 elements at a time for AVX2 XMM and 4 elements at a time for AVX2 YMM, with that being reflected on the table as having C the slowest and AVX2 YMM fastest. Furthermore their vectorization affects a lot of things for example, having AVX2 YMM to process four elements per iteration, this leads to a fewer loop iterations, which means lesser memory access and an improved cache utilization which makes the CPU have a better performance. Moreover, while running the program to gather the execution times we were able to observe that running the cache initialization multiple times did not significantly impact the results, indicating that the cache warm-up may be consistent after the first execution. Also, To minimize cache penalties, the C kernel was executed before each benchmark to warm up the cache. 
 </p>
+
 ### 2. Problems Encountered
+
+#### 1. Boundary Handling
+- For the cases where the number of inputs is not divisible by 2 (for AVX2_XMM) or 4 (for AVX2_YMM), the remainder is stored when the vector_size is divided by 2 or 4. That value is then stored in RCX so the **LOOP** instruction can be used to handle the remaining inputs that have not yet been computed. 
+#### 2. 1st Vector Address 
+- An issue arises from the Boundary Handling since the **DIV** instruction stores the remainder in *RDX*, where the address for the first vector is stored.
+- The solution for this problem is straightforward, *RDX* is temporarily stored in the memory and is loaded back into a register after the **DIV** instruction is done.
+#### 3. Computing for the Result in AVX2_XMM
+- After computing through all of the elements in the vectors, the result must be computed by summing all the values in the XMM register. This is done using the **HADDPD** instruction to add the XMM register with itself. 
+#### 4. Computing for the Result in AVX2_YMM
+- To sum all the elements in the YMM register, you must first extract the lower and upper half of the YMM register into two XMM registers. Then, the **HADDPD** instruction is first used to add both XMM registers then performing the instruction again to add the destination register with itself.
