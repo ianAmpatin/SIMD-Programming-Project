@@ -36,7 +36,6 @@ int main() {
 	// variables
 	double result = 0.0;
 	double CRes = 0.0; // C result, will be the reference for error checking
-	int CKernelTime = 0;
 
 	// array size and bytes required
 	const size_t pow = 20;
@@ -84,7 +83,6 @@ int main() {
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
-	CKernelTime = totalTime;
 	
 	// initialization of C kernel result
 	CRes = result;
@@ -117,7 +115,6 @@ int main() {
 	} else {
 		printf("x86 program is correct\n");
 	}
-	//printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
 
 	//--------------------------- AVX2_XMM Kernel ---------------------------//
 
@@ -139,12 +136,11 @@ int main() {
 
 	printf("Result : %lf\n", result);
 	printf("Execution time: %lldus\n", totalTime);
-	//printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
 	if (result != CRes) {
 		errCount++;
-		printf("AVX1 program is incorrect\n");
+		printf("AVX2_XMM program is incorrect\n");
 	} else {
-		printf("AVX1 program is correct\n");
+		printf("AVX2_XMM program is correct\n");
 	}
 
 	//--------------------------- AVX2_YMM Kernel ---------------------------//
@@ -169,14 +165,13 @@ int main() {
 
 	if (result != CRes) {
 		errCount++;
-		printf("AVX2 program is incorrect\n\n");
+		printf("AVX2_YMM program is incorrect\n\n");
 	} else {
-		printf("AVX2 program is correct\n\n");
+		printf("AVX2_YMM program is correct\n\n");
 	}
 
-	//printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
-
 	printf("Total Error Count: %lld\n\n", errCount);
+	printf("Update 10:53 PM - 2/2/2025");
 
 	// free arrays
 	free(vec1);

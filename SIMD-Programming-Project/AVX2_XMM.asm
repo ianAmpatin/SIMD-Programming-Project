@@ -37,7 +37,7 @@ AVX2_XMM:
         MOVDQU XMM1, [R10]
         MOVDQU XMM2, [R8]
         MULPD XMM1, XMM2
-        ADDPD XMM0, XMM1
+        VADDPD XMM0, XMM1
 
         ADD R10, 16
         ADD R8, 16
