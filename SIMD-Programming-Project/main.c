@@ -63,7 +63,7 @@ int main() {
 	// initialize array values
 	for (int i = 0; i < ARRAY_SIZE; i++)
 	{
-		vec1[i] = 1.0;
+		vec1[i] = 2.0;
 		vec2[i] = 1.0;
 	}
 
@@ -85,10 +85,11 @@ int main() {
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
 	CKernelTime = totalTime;
-
+	
+	// initialization of C kernel result
 	CRes = result;
 
-	printf("Result : %lf\n\n", result);
+	printf("Result : %lf\n", result);
 	printf("Execution time: %lldus\n", totalTime);
 
 	//--------------------------- x86 Kernel ---------------------------//
@@ -107,12 +108,15 @@ int main() {
 	}
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
+
+	printf("Result : %lf\n", result);
+	printf("Execution time: %lldus\n", totalTime);
 	if (result != CRes) {
 		errCount++;
+		printf("x86 program is incorrect\n");
+	} else {
+		printf("x86 program is correct\n");
 	}
-
-	printf("Result : %lf\n\n", result);
-	printf("Execution time: %lldus\n", totalTime);
 	//printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
 
 	//--------------------------- AVX2_XMM Kernel ---------------------------//
@@ -132,13 +136,16 @@ int main() {
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
 
-	if (result != CRes) {
-		errCount++;
-	}
 
-	printf("Result : %lf\n\n", result);
+	printf("Result : %lf\n", result);
 	printf("Execution time: %lldus\n", totalTime);
 	//printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
+	if (result != CRes) {
+		errCount++;
+		printf("AVX1 program is incorrect\n");
+	} else {
+		printf("AVX1 program is correct\n");
+	}
 
 	//--------------------------- AVX2_YMM Kernel ---------------------------//
 
@@ -157,12 +164,16 @@ int main() {
 	endTime = GetStopWatch();
 	totalTime = (endTime - startTime) / numExec;
 
-	if (result != CRes) {
-		errCount++;
-	}
-
 	printf("Result : %lf\n\n", result);
 	printf("Execution time: %lldus\n", totalTime);
+
+	if (result != CRes) {
+		errCount++;
+		printf("AVX2 program is incorrect\n\n");
+	} else {
+		printf("AVX2 program is correct\n\n");
+	}
+
 	//printf("Speed Difference with C Kernel: %lld\n", (totalTime - CKernelTime));
 
 	printf("Total Error Count: %lld\n\n", errCount);
