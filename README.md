@@ -85,7 +85,7 @@ Based on the table
 - C is the least efficient with having longer execution times as the vector sizes increase
 - x86 is faster than C but still slower than AVX2
 - AVX2 using XMM registers performed a notable decrease in execution time compared to the first two implementations.
-- AVX2 using YMM registers has the best results out of all the registers
+- AVX2 using YMM registers has the best results out of all the registers<br />
 *Will be further explained at the performance analysis part*
 ## Correctness Check
 ![image](https://github.com/user-attachments/assets/ee2d3e06-f407-4580-bf34-74400c3b0238)
