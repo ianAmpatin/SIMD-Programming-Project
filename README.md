@@ -91,3 +91,8 @@ Based on the table
 ![image](https://github.com/user-attachments/assets/ee2d3e06-f407-4580-bf34-74400c3b0238)
 
 ## Performance Analysis
+### 1. Analysis 
+<p align="justify"> 
+First is the evaluation of the execution speed and efficiency of different dot product kernel implementations: the C implementation, x86 SIMD, AVX2 using XMM registers, and AVX2 using YMM registers. As seen on the table provided on the *Average Execution Time section* the debug mode of C is the slowest among all of them while AVX2 YMM is the fastest. while x86 is has an improvement of speed from C, it is still slower from both AVX implementations because x86 still processes one element at a time like C but is faster because of its optimitation in floating-point execution. having said that both AVX are faster than the scalar implementations because of having the ability to process 2 elements at a time for AVX2 XMM and 4 elements at a time for AVX2 YMM, with that being reflected on the table as having C the slowest and AVX2 YMM fastest. 
+</p>
+### 2. Problems Encountered
