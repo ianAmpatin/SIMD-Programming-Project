@@ -38,7 +38,7 @@ int main() {
 	int CKernelTime = 0;
 
 	// array size and bytes required
-	const size_t pow = 20;
+	const size_t pow = 21;
 	const size_t ARRAY_SIZE = 1ULL << pow; // 1ULL for explicit 64-bit shift to suppress 32-bit implicitly converted to 64-bit compiler warning
 	const size_t ARRAY_BYTES = ARRAY_SIZE * sizeof(double);
 
