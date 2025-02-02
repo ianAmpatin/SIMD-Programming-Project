@@ -1,4 +1,24 @@
 # SIMD Programming Project
+This is an implementation of a dot product kernel using four different approaches:
+1. C Program – A standard implementation in C.
+2. x86-64 Assembly Language 
+3. x86 SIMD AVX2 (XMM Registers) 
+4. x86 SIMD AVX2 (YMM Registers) 
+
+The kernel computes the dot product of two vectors, A and B, both represented as double-precision floating-point arrays. The operation follows the formula:
+
+![image](https://github.com/user-attachments/assets/b78fa56c-2bfe-4d15-aed9-3d40b6efd9ee)
+
+### Input
+- n: An integer representing the length of vectors A and B.
+-  A, B: Vectors containing double-precision floating-point values.
+
+### Output
+- Store the computed sdot value in memory.
+- Display the result on the console for all implementations.
+
+
+
 
 ## Program Output
 ### A. Program Output with Execution Times
@@ -57,10 +77,11 @@
 
 ## Execution Time Table
 ### 1. Average Execution Time
-
+The following tables contains the average execution time (in microseconds) for different implementations  measured in both Debug and Release modes across various vector sizes.
 
 ![image](https://github.com/user-attachments/assets/3b5f2003-f502-49a4-9ce6-818db5970602)
 
 ## Correctness Check
+![image](https://github.com/user-attachments/assets/ee2d3e06-f407-4580-bf34-74400c3b0238)
 
 ## Performance Analysis
